@@ -4,7 +4,7 @@ public class PasswordStrengthMeter {
 
     public PasswordStrength meter(String s) {
 
-        if (s == null|| s == "") return PasswordStrength.INVALID;
+        if (s == null|| s.isEmpty()) return PasswordStrength.INVALID;
         int metCounts = getMetCriteriaCounts(s);
 
         if (metCounts <= 1) return PasswordStrength.WEAK;
