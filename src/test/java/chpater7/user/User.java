@@ -1,6 +1,10 @@
 package chpater7.user;
 
+import lombok.Getter;
+
+@Getter
 public class User {
+
     private String id;
     private String password;
     private String email;
@@ -11,11 +15,4 @@ public class User {
         this.email = email;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 }
