@@ -1,7 +1,8 @@
 package chapter8.testable;
 
-import subs.NoSubscriptionException;
-import subs.*;
+
+
+import chapter8.subs.*;
 
 import java.time.LocalDate;
 

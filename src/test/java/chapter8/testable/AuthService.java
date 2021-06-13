@@ -1,6 +1,6 @@
 package chapter8.testable;
 
-import auth.AuthUtil;
+import chapter8.auth.AuthUtil;
 
 public class AuthService {
     private String authKey = "somekey";

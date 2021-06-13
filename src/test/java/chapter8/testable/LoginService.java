@@ -1,9 +1,9 @@
 package chapter8.testable;
 
-import auth.AuthUtil;
-import auth.Customer;
-import auth.CustomerRepository;
-import auth.LoginResult;
+
+import chapter8.auth.Customer;
+import chapter8.auth.CustomerRepository;
+import chapter8.auth.LoginResult;
 
 public class LoginService {
     private AuthService authService = new AuthService();

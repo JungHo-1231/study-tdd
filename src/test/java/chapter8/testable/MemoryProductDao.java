@@ -1,7 +1,8 @@
 package chapter8.testable;
 
-import subs.Product;
-import subs.ProductDao;
+
+import chapter8.subs.Product;
+import chapter8.subs.ProductDao;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,11 +1,13 @@
 package chapter8.testable;
 
-import subs.Product;
-import subs.Subscription;
+
+import chapter8.subs.Product;
+import chapter8.subs.Subscription;
 
 import java.time.LocalDate;
 
-import static subs.Grade.GOLD;
+import static chapter8.subs.Grade.GOLD;
+
 
 public class PointRule {
 

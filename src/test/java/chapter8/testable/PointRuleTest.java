@@ -1,9 +1,10 @@
 package chapter8.testable;
 
+import chapter8.subs.Grade;
+import chapter8.subs.Product;
+import chapter8.subs.Subscription;
 import org.junit.jupiter.api.Test;
-import subs.Grade;
-import subs.Product;
-import subs.Subscription;
+
 
 import java.io.IOException;
 import java.time.LocalDate;
