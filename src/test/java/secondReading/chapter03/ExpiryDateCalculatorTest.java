@@ -119,6 +119,20 @@ public class ExpiryDateCalculatorTest {
         assertExpiryDate(payDate, expectedExpiryDate);
     }
 
+    @Test
+    void 십만원_납부하면_1년_제공() throws Exception{
+        LocalDate billingDate = LocalDate.of(2019, 1, 28);
+        int payAmount = 100_000;
+        LocalDate expectedExpiryDate = LocalDate.of(2020, 1, 28);
+
+        PayDate payDate = PayDate.builder()
+                .billingDate(billingDate)
+                .payAmount(payAmount)
+                .build();
+
+        assertExpiryDate(payDate, expectedExpiryDate);
+    }
+
 
     private void assertExpiryDate(PayDate payDate, LocalDate expectedExpiryDate){
 
