@@ -1,25 +1,29 @@
 package secondReading.chapter07;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.mock;
 
 public class UserRegisterTest {
     private UserRegister userRegister;
-    private StubWeakPasswordChecker stubWeakPasswordChecker
-            = new StubWeakPasswordChecker();
+    private WeakPasswordChecker mockPasswordChecker= Mockito.mock(WeakPasswordChecker.class);
     private MemoryUserRepository fakeRepository = new MemoryUserRepository();
-    private SpyEmailNotifier spyEmailNotifier = new SpyEmailNotifier();
+    private EmailNotifier mockEmailNotifier = Mockito.mock(EmailNotifier.class);
 
 
     @BeforeEach
     void setUp() {
-        userRegister = new UserRegister(stubWeakPasswordChecker
+        userRegister = new UserRegister(mockPasswordChecker
                 , fakeRepository
-                , spyEmailNotifier
+                , mockEmailNotifier
         );
     }
 
@@ -27,7 +31,7 @@ public class UserRegisterTest {
     @Test
     @DisplayName("약한 암호면 가입 실패")
     void weakPassword() throws Exception{
-        stubWeakPasswordChecker.setWeak(true);
+        given(mockPasswordChecker.checkPasswordWeak("pw")).willReturn(true);
 
         assertThrows(WeakPassWordException.class, ()-> {
             userRegister.register("id", "pw","email");
@@ -56,11 +60,37 @@ public class UserRegisterTest {
 
         userRegister.register("id", "pw", email);
 
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+        //when
+        then(mockEmailNotifier)
+                .should()
+                .sendRegisterEmail(captor.capture());
+
+        String realEmail = captor.getValue();
+
+        assertEquals("email@email.com", realEmail);
+
+
+        //then
+//        assertTrue(spyEmailNotifier.isCalled());
+//        assertEquals(email, spyEmailNotifier.getEmail());
+
+
+    }
+
+    @Test
+    @DisplayName("회원 가입시 암호 검사를 수행함")
+    void checkPassword() throws Exception{
+        //given
+        userRegister.register("id", "pw", "email");
+
         //when
 
         //then
-        assertTrue(spyEmailNotifier.isCalled());
-        assertEquals(email, spyEmailNotifier.getEmail());
+        then(mockPasswordChecker)
+                .should()
+                .checkPasswordWeak(anyString());
     }
 
 
