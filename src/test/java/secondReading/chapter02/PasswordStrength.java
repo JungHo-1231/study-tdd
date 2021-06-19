@@ -1,5 +1,5 @@
 package secondReading.chapter02;
 
 public enum PasswordStrength {
-    STRONG
+    STRONG, NORMAL, WEAK, INVALID
 }
